@@ -6,12 +6,16 @@ const port = 3000;
 app.use(express.json());
 
 app.get("/", (req: Request, res: Response) => {
-  const clientIp = req.ip ?? req.socket.remoteAddress ?? "unknown";
-  console.log(`Request IP: ${clientIp}`);
+  const ip = {
+    ip: req.ip,
+    ips: req.ips,
+    xForwardedFor: req.headers['x-forwarded-for'],
+    xRealIp: req.headers['x-real-ip'],
+  };
 
-  res.json({
-    ip: clientIp,
-  });
+  console.log(`Request IP: ${JSON.stringify(ip)}`);
+
+  res.json({ ip });
 });
 
 app.listen(port, () => {
