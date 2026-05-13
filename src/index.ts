@@ -3,14 +3,7 @@ import express, { Request, Response } from "express";
 const app = express();
 const port = 3000;
 
-app.set('trust proxy', [
-  'loopback',
-  'linklocal',
-  'uniquelocal',
-  '10.0.0.0/8',
-  '172.16.0.0/12',
-  '192.168.0.0/16',
-]);
+app.set('trust proxy', true);
 
 app.use(express.json());
 
